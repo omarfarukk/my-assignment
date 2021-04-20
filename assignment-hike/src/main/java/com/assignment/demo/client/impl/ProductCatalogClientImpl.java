@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductCatalogClientImpl implements IProductCatalogClient {
 
-    private final RestTemplate restTemplate = new RestTemplate();
+    private final RestTemplate restTemplate;
 
     @Setter
     @Value("${product.mobile.handset.base-uri}")

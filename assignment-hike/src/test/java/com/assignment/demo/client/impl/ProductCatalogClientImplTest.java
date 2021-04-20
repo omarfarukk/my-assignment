@@ -19,11 +19,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @ExtendWith(MockitoExtension.class)
 class ProductCatalogClientImplTest {
 
-    @Mock
-    private RestTemplate restTemplate;
+    private RestTemplate restTemplate = new RestTemplate();
     private String baseURL = "https://run.mocky.io/v3/b755c334-9627-4b09-84f2-548cb1918184";
-    @InjectMocks
-    private ProductCatalogClientImpl productCatalogClient;
+    private ProductCatalogClientImpl productCatalogClient = new ProductCatalogClientImpl(restTemplate);
 
     @Test
     public void test_getMobileHandsetsFromCatalog() {
