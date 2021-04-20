@@ -1,5 +1,6 @@
 package com.assignment.demo.data;
 
+import com.assignment.demo.util.TestUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -17,9 +18,9 @@ class MobileHandsetTest {
     }
 
     @Test
-    public void test_Json_Deserialization() throws JsonProcessingException {
+    public void test_Json_Deserialization() {
         final String json = "{\"id\":25846,\"brand\":\"Apple\",\"phone\":\"Apple iPad Pro 12.9 (2018)\",\"picture\":\"https:\\/\\/cdn2.gsmarena.com\\/vv\\/bigpic\\/apple-ipad-pro-129-2018.jpg\",\"release\":{\"announceDate\":\"2018 October\",\"priceEur\":1100},\"sim\":\"Nano-SIM eSIM\",\"resolution\":\"2048 x 2732 pixels\",\"hardware\":{\"audioJack\":\"No\",\"gps\":\"Yes with A-GPS\",\"battery\":\"Li-Po 9720 mAh battery (36.71 Wh)\"}}";
-        MobileHandset handset = doDeserialization(json, MobileHandset.class);
+        MobileHandset handset = TestUtil.doDeserialization(json, MobileHandset.class);
         assertTrue(Objects.nonNull(handset));
         assertTrue(Objects.nonNull(handset.getRelease()));
         assertTrue(Objects.nonNull(handset.getHardware()));
@@ -29,23 +30,23 @@ class MobileHandsetTest {
     }
 
     @Test
-    public void test_Json_Serialization() throws JsonProcessingException {
+    public void test_Json_Serialization() {
         final String json = "{\"id\":25846,\"brand\":\"Apple\",\"phone\":\"Apple iPad Pro 12.9 (2018)\",\"picture\":\"https:\\/\\/cdn2.gsmarena.com\\/vv\\/bigpic\\/apple-ipad-pro-129-2018.jpg\",\"release\":{\"announceDate\":\"2018 October\",\"priceEur\":1100},\"sim\":\"Nano-SIM eSIM\",\"resolution\":\"2048 x 2732 pixels\",\"hardware\":{\"audioJack\":\"No\",\"gps\":\"Yes with A-GPS\",\"battery\":\"Li-Po 9720 mAh battery (36.71 Wh)\"}}";
-        MobileHandset mobileHandset = doDeserialization(json, MobileHandset.class);
+        MobileHandset mobileHandset = TestUtil.doDeserialization(json, MobileHandset.class);
         String string = doSerialization(mobileHandset);
         assertNotNull(string);
         assertTrue(string.length() > 0);
 
     }
 
-    private  <T> T  doDeserialization(String json,Class<T> cls) throws JsonProcessingException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.readValue(json,cls);
-    }
 
-    private  String doSerialization(Object object) throws JsonProcessingException {
+    private  String doSerialization(Object object)  {
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(object);
+        try {
+            return objectMapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            return "{}";
+        }
     }
 
 }

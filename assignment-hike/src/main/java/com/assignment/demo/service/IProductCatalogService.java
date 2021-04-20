@@ -5,7 +5,10 @@ import com.assignment.demo.data.domain.MobileHandset;
 import java.util.List;
 
 public interface IProductCatalogService {
-    void refreshMobileHandsetCatalog();
-    List<MobileHandset> findMobileHandsets(MobileHandset mobileHandset);
+    List<MobileHandset> search(MobileHandset mobileHandset);
+    List<MobileHandset> saveMobileHandsetsFromCatalog();
+    List<MobileHandset> saveAll(Iterable<MobileHandset> iterables);
+    List<MobileHandset> readMobileHandsetsFromCatalog();
+
 
 }
