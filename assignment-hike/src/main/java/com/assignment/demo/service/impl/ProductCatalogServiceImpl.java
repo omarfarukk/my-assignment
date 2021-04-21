@@ -39,7 +39,7 @@ public class ProductCatalogServiceImpl implements IProductCatalogService {
 
     @Override
     public List<MobileHandset> search(MobileHandset mobileHandset){
-        return Objects.isNull(mobileHandset) || mobileHandset.equals(emptyObject) ?
+        return Objects.isNull(mobileHandset) ?
                 Collections.emptyList() :
                 mobileHandsetRepository.findAll(Example.of(mobileHandset,exampleMatcher));
     }
